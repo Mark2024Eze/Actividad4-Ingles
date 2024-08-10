@@ -12,6 +12,7 @@
       font-family: 'Montserrat', sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      position: relative;
     }
 
     h1 {
@@ -129,12 +130,29 @@
       padding-top: 10px;
       border-top: 1px solid #ccc;
     }
+
+    /* Estilo para el logo de fondo */
+    .background-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px; /* Ajusta el tamaño del logo aquí */
+      opacity: 0.5; /* Controla la opacidad del logo aquí */
+      z-index: -1;
+    }
+
   </style>
   <title>Matthew's Exercise</title>
 </head>
 <body>
-
-  <h1>Matthew's Exercise</h1>
+    <div style="display: flex; align-items: center;">
+        <img src="https://github.com/Mark2024Eze/Proyecto-para-ingles/blob/main/instituto%20overcome.jpg?raw=true" alt="Instituto Overcome" style="max-width: 100px; margin-right: 20px;">
+        <h1>Activity Choose the right option  Matthew's Exercise</h1>
+    </div>
+  
+  <!-- Logo de fondo -->
+  <img src="Imagen de WhatsApp 2024-08-09 a las 15.46.00_386a39f7.jpg" alt="Logo de fondo" class="background-logo">
 
   <!-- Barra de progreso -->
   <div class="progress-container">
@@ -252,119 +270,79 @@
   </div>
 
   <div class="respuesta">
-    <p>H - Is his dad a nurse?</p>
+    <p>H - Is Matthew a sad boy?</p>
     <div class="options">
       <label class="option">
-        <input type="radio" name="H" id="H1" data-correct="false">
-        Yes
+        <input type="radio" name="H" id="H1" data-correct="true">
+        No, he is very happy
       </label>
       <label class="option">
-        <input type="radio" name="H" id="H2" data-correct="true">
-        No
+        <input type="radio" name="H" id="H2" data-correct="false">
+        Yes, he is sad
       </label>
     </div>
   </div>
 
-  <div class="respuesta">
-    <p>I - What does his mum do?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="I" id="I1" data-correct="true">
-        Nurse
-      </label>
-      <label class="option">
-        <input type="radio" name="I" id="I2" data-correct="false">
-        Teacher
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>J - Is Matthew a happy boy?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="J" id="J1" data-correct="true">
-        Yes
-      </label>
-      <label class="option">
-        <input type="radio" name="J" id="J2" data-correct="false">
-        No
-      </label>
-    </div>
-  </div>
-
-  <!-- Botones para revisar y limpiar -->
-  <div style="text-align: center;">
-    <button onclick="review()">Review</button>
-    <button class="clear-btn" onclick="clearSelections()">Clear</button>
-  </div>
+  <!-- Botones -->
+  <button onclick="checkAnswers()">Check Answers</button>
+  <button class="limpiar-btn" onclick="resetQuiz()">Clear</button>
 
   <footer>
-    <p>&copy; 2024 Matthew's Exercise. All rights reserved.</p>
+    <p>&copy; 2024 Profesora Mariana Cuello</p>
   </footer>
 
   <script>
-    function review() {
-      const answers = document.querySelectorAll('.respuesta');
-      let correct = 0;
-      let incorrect = 0;
+    function checkAnswers() {
+      const options = document.querySelectorAll('.option input[type="radio"]');
+      let correctCount = 0;
+      let incorrectCount = 0;
 
-      answers.forEach(answer => {
-        const inputs = answer.querySelectorAll('input[type="radio"]');
-        inputs.forEach(input => {
-          if (input.checked) {
-            const label = input.parentElement;
-            if (input.dataset.correct === 'true') {
-              label.classList.add('correct');
-              correct++;
-            } else {
-              label.classList.add('incorrect');
-              incorrect++;
-            }
+      options.forEach(option => {
+        const label = option.parentElement;
+
+        if (option.checked) {
+          if (option.dataset.correct === "true") {
+            correctCount++;
+            label.classList.add('correct');
+          } else {
+            incorrectCount++;
+            label.classList.add('incorrect');
           }
-        });
+        } else {
+          label.classList.remove('correct', 'incorrect');
+        }
       });
 
-      const progress = (correct / answers.length) * 100;
-      const progressBar = document.getElementById('progressBar');
-      progressBar.style.width = `${progress}%`;
-      progressBar.textContent = `${progress.toFixed(2)}%`;
+      const totalQuestions = correctCount + incorrectCount;
+      const correctPercentage = Math.round((correctCount / totalQuestions) * 100);
+      const incorrectPercentage = Math.round((incorrectCount / totalQuestions) * 100);
 
-      const errorProgress = (incorrect / answers.length) * 100;
-      const errorBar = document.getElementById('errorBar');
-      errorBar.style.width = `${errorProgress}%`;
-      errorBar.textContent = `${errorProgress.toFixed(2)}%`;
+      document.getElementById('progressBar').style.width = `${correctPercentage}%`;
+      document.getElementById('progressBar').textContent = `${correctPercentage}%`;
 
-      const result = document.getElementById('resultado');
-      result.textContent = `Correct: ${correct}, Incorrect: ${incorrect}`;
+      document.getElementById('errorBar').style.width = `${incorrectPercentage}%`;
+      document.getElementById('errorBar').textContent = `${incorrectPercentage}%`;
+
+      document.getElementById('resultado').textContent = `Correct: ${correctCount}, Incorrect: ${incorrectCount}`;
     }
 
-    function clearSelections() {
-      const answers = document.querySelectorAll('.respuesta');
-      answers.forEach(answer => {
-        const inputs = answer.querySelectorAll('input[type="radio"]');
-        inputs.forEach(input => {
-          input.checked = false;
-        });
-        const labels = answer.querySelectorAll('label');
-        labels.forEach(label => {
-          label.classList.remove('correct');
-          label.classList.remove('incorrect');
-        });
+    function resetQuiz() {
+      const options = document.querySelectorAll('.option input[type="radio"]');
+      options.forEach(option => {
+        option.checked = false;
+        const label = option.parentElement;
+        label.classList.remove('correct', 'incorrect');
       });
 
-      const progressBar = document.getElementById('progressBar');
-      progressBar.style.width = '0%';
-      progressBar.textContent = '0%';
+      document.getElementById('progressBar').style.width = '0%';
+      document.getElementById('progressBar').textContent = '0%';
 
-      const errorBar = document.getElementById('errorBar');
-      errorBar.style.width = '0%';
-      errorBar.textContent = '0%';
+      document.getElementById('errorBar').style.width = '0%';
+      document.getElementById('errorBar').textContent = '0%';
 
-      const result = document.getElementById('resultado');
-      result.textContent = `Correct: 0, Incorrect: 0`;
+      document.getElementById('resultado').textContent = 'Correct: 0, Incorrect: 0';
     }
   </script>
 </body>
-    </html>
+</html>
     
