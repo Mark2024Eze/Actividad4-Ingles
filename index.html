@@ -6,22 +6,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
       font-family: 'Montserrat', sans-serif;
-      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
       color: #333;
       position: relative;
+      min-height: 100vh;
+      overflow: auto;
     }
 
-    h1 {
-      text-align: center;
-      color: #0066cc;
+    .logo-container {
+      position: relative;
+      height: 100%;
+      min-height: 100vh;
+    }
+
+    .background-logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://github.com/Mark2024Eze/Proyecto-para-ingles/blob/main/instituto%20overcome.jpg?raw=true');
+      background-size: 50%; /* Ajusta el tamaño del logo */
+      background-position: center; /* Centra el logo */
+      background-repeat: no-repeat;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+      background-color: transparent; /* Fondo transparente */
+    }
+
+    .header img {
+      max-width: 120px;
+      margin-right: 20px;
+    }
+
+    .header .title {
+      font-size: 1.5em;
+      color: #004d99;
+    }
+
+    .content {
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+      background-color: transparent; /* Fondo transparente */
+      margin: 20px;
     }
 
     .progress-container, .error-container {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       width: 100%;
       background-color: #ddd;
       border-radius: 5px;
@@ -29,43 +72,39 @@
     }
 
     .progress-bar, .error-bar {
-      height: 20px;
+      height: 25px;
       width: 0;
       border-radius: 5px;
       text-align: center;
-      line-height: 20px;
+      line-height: 25px;
       color: white;
     }
 
     .progress-bar {
-      background-color: #4CAF50;
+      background-color: #28a745;
     }
 
     .error-bar {
-      background-color: #e44d26;
+      background-color: #dc3545;
     }
 
     .resultado {
-      margin-bottom: 20px;
-      font-size: 16px;
+      margin-bottom: 30px;
+      font-size: 18px;
       font-weight: bold;
-      color: #0066cc;
+      color: #004d99;
     }
 
     .respuesta {
       margin-bottom: 20px;
-    }
-
-    .respuesta p {
-      margin-bottom: 10px;
-      font-weight: bold;
+      padding: 0; /* Eliminado el padding */
+      background-color: transparent; /* Fondo transparente */
     }
 
     .options {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
     }
 
     .option {
@@ -73,20 +112,14 @@
       align-items: center;
       justify-content: center;
       background-color: #ffffff;
-      border: 1px solid #a3c2f1; /* Borde azul suave */
+      border: 1px solid #a3c2f1;
       border-radius: 8px;
-      padding: 8px 12px; /* Tamaño pequeño */
-      max-width: 200px;
-      text-align: center;
+      padding: 8px 12px;
       cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
     }
 
     .option:hover {
       background-color: #e7f0ff;
-      border-color: #7da9e3; /* Borde azul suave en hover */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada en hover */
     }
 
     .option.correct {
@@ -103,243 +136,277 @@
       padding: 10px 15px;
       font-size: 16px;
       cursor: pointer;
-      background-color: #0066cc;
+      background-color: #004d99;
       color: white;
       border: none;
       border-radius: 5px;
       margin-right: 10px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     button:hover {
-      background-color: #005bb5;
-      transform: scale(1.05);
+      background-color: #003366;
     }
 
-    .limpiar-btn {
-      background-color: #e44d26;
+    .clear-btn {
+      background-color: #dc3545;
     }
 
-    .limpiar-btn:hover {
-      background-color: #d0451b;
+    .clear-btn:hover {
+      background-color: #c82333;
     }
 
     footer {
       text-align: center;
-      margin-top: 30px;
-      padding-top: 10px;
+      padding: 10px;
       border-top: 1px solid #ccc;
     }
-
-    /* Estilo para el logo de fondo */
-    .background-logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 300px; /* Ajusta el tamaño del logo aquí */
-      opacity: 0.5; /* Controla la opacidad del logo aquí */
-      z-index: -1;
-    }
-
   </style>
   <title>Matthew's Exercise</title>
 </head>
 <body>
-    <div style="display: flex; align-items: center;">
-        <img src="https://github.com/Mark2024Eze/Proyecto-para-ingles/blob/main/instituto%20overcome.jpg?raw=true" alt="Instituto Overcome" style="max-width: 100px; margin-right: 20px;">
-        <h1>Activity Choose the right option  Matthew's Exercise</h1>
+  <div class="logo-container">
+    <div class="background-logo"></div>
+
+    <div class="header">
+      <img src="https://github.com/Mark2024Eze/Proyecto-para-ingles/blob/main/instituto%20overcome.jpg?raw=true" alt="Instituto Overcome">
+      <div class="title">Activity Choose the right option</div>
     </div>
 
-  <!-- Barra de progreso -->
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar">0%</div>
-  </div>
+    <div class="content">
+      <h1>Matthew's Exercise</h1>
 
-  <!-- Barra de errores -->
-  <div class="error-container">
-    <div class="error-bar" id="errorBar">0%</div>
-  </div>
+      <!-- Barra de progreso -->
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar">0%</div>
+      </div>
 
-  <!-- Resultado -->
-  <div class="resultado" id="resultado">Correct: 0, Incorrect: 0</div>
+      <!-- Barra de errores -->
+      <div class="error-container">
+        <div class="error-bar" id="errorBar">0%</div>
+      </div>
 
-  <!-- Texto -->
-  <p>This is Matthew, he's 14 years old. He's tall and slim. He has got short dark hair and big brown eyes. He can't play football, but he can play basketball very well! He is in a team called Bulldogs. His favorite thing is his phone, it's dark blue. His favorite food is pasta. Matthew's father is a taxi driver and his mother is a nurse. Matthew is a very happy boy. He is always at the park with his friends and schoolmates.</p>
+      <!-- Resultado -->
+      <div class="resultado" id="resultado">Correct: 0, Incorrect: 0</div>
 
-  <!-- Preguntas -->
-  <div class="respuesta">
-    <p>A - How old is Matthew?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="A" id="A1" data-correct="false">
-        12 years old
-      </label>
-      <label class="option">
-        <input type="radio" name="A" id="A2" data-correct="true">
-        14 years old
-      </label>
+      <!-- Texto -->
+      <p>This is Matthew, he's 14 years old. He's tall and slim. He has got short dark hair and big brown eyes. He can't play football, but he can play basketball very well! He is in a team called Bulldogs. His favorite thing is his phone, it's dark blue. His favorite food is pasta. Matthew's father is a taxi driver and his mother is a nurse. Matthew is a very happy boy. He is always at the park with his friends and schoolmates.</p>
+
+      <!-- Preguntas -->
+      <div class="respuesta">
+        <p>A - How old is Matthew?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="A" id="A1" data-correct="false">
+            12 years old
+          </label>
+          <label class="option">
+            <input type="radio" name="A" id="A2" data-correct="true">
+            14 years old
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>B - Is Matthew short?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="B" id="B1" data-correct="true">
+            No, he is tall
+          </label>
+          <label class="option">
+            <input type="radio" name="B" id="B2" data-correct="false">
+            Yes, he is short
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>C - Can he play football?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="C" id="C1" data-correct="false">
+            Yes
+          </label>
+          <label class="option">
+            <input type="radio" name="C" id="C2" data-correct="true">
+            No
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>D - What sport can he play?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="D" id="D1" data-correct="false">
+            Tennis
+          </label>
+          <label class="option">
+            <input type="radio" name="D" id="D2" data-correct="true">
+            Basketball
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>E - What's his team's name?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="E" id="E1" data-correct="true">
+            Bulldogs
+          </label>
+          <label class="option">
+            <input type="radio" name="E" id="E2" data-correct="false">
+            Tigers
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>F - What color is his phone?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="F" id="F1" data-correct="true">
+            Dark blue
+          </label>
+          <label class="option">
+            <input type="radio" name="F" id="F2" data-correct="false">
+            Black
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>G - What is his favorite food?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="G" id="G1" data-correct="false">
+            Pizza
+          </label>
+          <label class="option">
+            <input type="radio" name="G" id="G2" data-correct="true">
+            Pasta
+          </label>
+        </div>
+      </div>
+
+      <!-- Preguntas adicionales -->
+      <div class="respuesta">
+        <p>H - What color are his eyes?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="H" id="H1" data-correct="false">
+            Blue
+          </label>
+          <label class="option">
+            <input type="radio" name="H" id="H2" data-correct="true">
+            Brown
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>I - What does Matthew do on weekends?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="I" id="I1" data-correct="true">
+            He is at the park with his friends.
+          </label>
+          <label class="option">
+            <input type="radio" name="I" id="I2" data-correct="false">
+            He studies at home.
+          </label>
+        </div>
+      </div>
+
+      <div class="respuesta">
+        <p>J - What is his mother's profession?</p>
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="J" id="J1" data-correct="true">
+            Nurse
+          </label>
+          <label class="option">
+            <input type="radio" name="J" id="J2" data-correct="false">
+            Teacher
+          </label>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <button id="verifyButton">Verify Answers</button>
+      <button id="clearButton" class="clear-btn">Clear Answers</button>
     </div>
+
+    <footer>
+      <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
   </div>
-
-  <div class="respuesta">
-    <p>B - Is Matthew short?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="B" id="B1" data-correct="true">
-        No, he is tall
-      </label>
-      <label class="option">
-        <input type="radio" name="B" id="B2" data-correct="false">
-        Yes, he is short
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>C - Can he play football?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="C" id="C1" data-correct="false">
-        Yes
-      </label>
-      <label class="option">
-        <input type="radio" name="C" id="C2" data-correct="true">
-        No
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>D - What sport can he play?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="D" id="D1" data-correct="false">
-        Tennis
-      </label>
-      <label class="option">
-        <input type="radio" name="D" id="D2" data-correct="true">
-        Basketball
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>E - What's his team's name?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="E" id="E1" data-correct="true">
-        Bulldogs
-      </label>
-      <label class="option">
-        <input type="radio" name="E" id="E2" data-correct="false">
-        Tigers
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>F - What color is his phone?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="F" id="F1" data-correct="true">
-        Dark blue
-      </label>
-      <label class="option">
-        <input type="radio" name="F" id="F2" data-correct="false">
-        Black
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>G - What's his favorite food?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="G" id="G1" data-correct="true">
-        Pasta
-      </label>
-      <label class="option">
-        <input type="radio" name="G" id="G2" data-correct="false">
-        Pizza
-      </label>
-    </div>
-  </div>
-
-  <div class="respuesta">
-    <p>H - Is Matthew a sad boy?</p>
-    <div class="options">
-      <label class="option">
-        <input type="radio" name="H" id="H1" data-correct="true">
-        No, he is very happy
-      </label>
-      <label class="option">
-        <input type="radio" name="H" id="H2" data-correct="false">
-        Yes, he is sad
-      </label>
-    </div>
-  </div>
-
-  <!-- Botones -->
-  <button onclick="checkAnswers()">Check Answers</button>
-  <button class="limpiar-btn" onclick="resetQuiz()">Clear</button>
-
-  <footer>
-    <p>&copy; 2024 Profesora Mariana Cuello</p>
-  </footer>
 
   <script>
-    function checkAnswers() {
-      const options = document.querySelectorAll('.option input[type="radio"]');
+    const correctAnswers = {
+      A: 'A2',
+      B: 'B1',
+      C: 'C2',
+      D: 'D2',
+      E: 'E1',
+      F: 'F1',
+      G: 'G2',
+      H: 'H2',
+      I: 'I1',
+      J: 'J1'
+    };
+
+    document.getElementById('verifyButton').addEventListener('click', () => {
       let correctCount = 0;
       let incorrectCount = 0;
+      let totalQuestions = Object.keys(correctAnswers).length;
 
-      options.forEach(option => {
-        const label = option.parentElement;
+      Object.keys(correctAnswers).forEach(question => {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        if (selectedOption) {
+          const isCorrect = selectedOption.id === correctAnswers[question];
+          const optionLabel = selectedOption.parentElement;
 
-        if (option.checked) {
-          if (option.dataset.correct === "true") {
+          if (isCorrect) {
             correctCount++;
-            label.classList.add('correct');
+            optionLabel.classList.add('correct');
+            optionLabel.classList.remove('incorrect');
           } else {
             incorrectCount++;
-            label.classList.add('incorrect');
+            optionLabel.classList.add('incorrect');
+            optionLabel.classList.remove('correct');
           }
-        } else {
-          label.classList.remove('correct', 'incorrect');
         }
       });
 
-      const totalQuestions = correctCount + incorrectCount;
-      const correctPercentage = Math.round((correctCount / totalQuestions) * 100);
-      const incorrectPercentage = Math.round((incorrectCount / totalQuestions) * 100);
-
-      document.getElementById('progressBar').style.width = `${correctPercentage}%`;
-      document.getElementById('progressBar').textContent = `${correctPercentage}%`;
-
-      document.getElementById('errorBar').style.width = `${incorrectPercentage}%`;
-      document.getElementById('errorBar').textContent = `${incorrectPercentage}%`;
-
       document.getElementById('resultado').textContent = `Correct: ${correctCount}, Incorrect: ${incorrectCount}`;
-    }
 
-    function resetQuiz() {
-      const options = document.querySelectorAll('.option input[type="radio"]');
-      options.forEach(option => {
-        option.checked = false;
-        const label = option.parentElement;
-        label.classList.remove('correct', 'incorrect');
+      const progress = (correctCount / totalQuestions) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressBar').textContent = `${Math.round(progress)}%`;
+
+      const errors = (incorrectCount / totalQuestions) * 100;
+      document.getElementById('errorBar').style.width = `${errors}%`;
+      document.getElementById('errorBar').textContent = `${Math.round(errors)}%`;
+    });
+
+    document.getElementById('clearButton').addEventListener('click', () => {
+      document.querySelectorAll('input[type="radio"]').forEach(input => {
+        input.checked = false;
       });
 
-      document.getElementById('progressBar').style.width = '0%';
-      document.getElementById('progressBar').textContent = '0%';
+      document.querySelectorAll('.option').forEach(option => {
+        option.classList.remove('correct');
+        option.classList.remove('incorrect');
+      });
 
-      document.getElementById('errorBar').style.width = '0%';
-      document.getElementById('errorBar').textContent = '0%';
-
-      document.getElementById('resultado').textContent = 'Correct: 0, Incorrect: 0';
-    }
+      document.getElementById('resultado').textContent = `Correct: 0, Incorrect: 0`;
+      document.getElementById('progressBar').style.width = `0%`;
+      document.getElementById('progressBar').textContent = `0%`;
+      document.getElementById('errorBar').style.width = `0%`;
+      document.getElementById('errorBar').textContent = `0%`;
+    });
   </script>
 </body>
 </html>
-    
